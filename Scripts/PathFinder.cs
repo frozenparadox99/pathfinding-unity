@@ -25,6 +25,11 @@ public class PathFinder : MonoBehaviour
     public Color arrowColor = new Color(0.85f, 0.85f, 0.85f, 1f);
     public Color highlightColor = new Color(1f, 1f, 0.5f, 1f);
 
+    public bool showIterations = true;
+    public bool showColors = true;
+    public bool showArrows = true;
+    public bool exitOnGoal = true;
+
     public bool isComplete = false;
     int m_iterations = 0;
 
@@ -115,6 +120,8 @@ public class PathFinder : MonoBehaviour
 
     public IEnumerator SearchRoutine(float timeStep = 0.1f)
     {
+        float timeStart = Time.time;
+
         yield return null;
 
         while (!isComplete)
@@ -134,25 +141,44 @@ public class PathFinder : MonoBehaviour
                 if (m_frontierNodes.Contains(m_goalNode))
                 {
                     m_pathNodes = GetPathNodes(m_goalNode);
-                }
-
-                ShowColors();
-
-                if (m_graphView != null)
-                {
-                    m_graphView.ShowNodeArrows(m_frontierNodes.ToList(),arrowColor);
-
-                    if (m_frontierNodes.Contains(m_goalNode))
+                    if (exitOnGoal)
                     {
-                        m_graphView.ShowNodeArrows(m_pathNodes, highlightColor);
+                        isComplete = true;
                     }
                 }
 
-                yield return new WaitForSeconds(timeStep);
+                if (showIterations)
+                {
+                    ShowDiagnostics();
+
+                    yield return new WaitForSeconds(timeStep);
+                }
             }
             else
             {
                 isComplete = true;
+            }
+        }
+
+        ShowDiagnostics();
+        Debug.Log("Pathfinder searchroutine : elapsed time = " + (Time.time - timeStart).ToString()+" seconds");
+    }
+
+    private void ShowDiagnostics()
+    {
+        if (showColors)
+        {
+            ShowColors();
+        }
+
+
+        if (m_graphView != null && showArrows)
+        {
+            m_graphView.ShowNodeArrows(m_frontierNodes.ToList(), arrowColor);
+
+            if (m_frontierNodes.Contains(m_goalNode))
+            {
+                m_graphView.ShowNodeArrows(m_pathNodes, highlightColor);
             }
         }
     }
