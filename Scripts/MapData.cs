@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class MapData : MonoBehaviour
 {
@@ -40,15 +41,33 @@ public class MapData : MonoBehaviour
         return GetTextFromFile(textAsset);
     }
 
+    public void SetDimensions(List<string> textLines)
+    {
+        height = textLines.Count;
+        foreach(string line in textLines)
+        {
+            if(line.Length > width)
+            {
+                width = line.Length;
+            }
+        }
+    }
+
    public int[,] MakeMap()
     {
+        List<string> lines = new List<string>();
+        lines = GetTextFromFile();
+        SetDimensions(lines);
+
         int[,] map = new int[width, height];
 
         for(int y = 0; y < height; y++)
         {
             for(int x = 0; x < width; x++)
             {
-                map[x, y] = 0;
+               if (lines[y].Length > x) { 
+                }
+              map[x, y] = (int)Char.GetNumericValue(lines[y][x]);
             }
         }
 
