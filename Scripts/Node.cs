@@ -22,6 +22,9 @@ public class Node
 
     //List to track neighbors
     public List<Node> neighbors = new List<Node>();
+
+    public float distanceTraveled = Mathf.Infinity;
+
     public Node previous = null;
 
     public Node(int xIndex,int yIndex,NodeType nodeType)
