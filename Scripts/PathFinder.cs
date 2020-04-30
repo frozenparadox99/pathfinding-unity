@@ -33,6 +33,14 @@ public class PathFinder : MonoBehaviour
     public bool isComplete = false;
     int m_iterations = 0;
 
+    public enum Mode
+    {
+        BreadthFirstSearch = 0,
+        Dijkstra = 1
+    }
+
+    public Mode mode = Mode.BreadthFirstSearch;
+
     public void Init(Graph graph,GraphView graphView,Node start,Node goal)
     {
         if (start == null || goal == null || graph == null || graphView == null)
@@ -75,7 +83,7 @@ public class PathFinder : MonoBehaviour
 
         isComplete = false;
         m_iterations = 0;
-
+        m_startNode.distanceTraveled = 0;
     }
 
     void ShowColors()
@@ -136,7 +144,15 @@ public class PathFinder : MonoBehaviour
                     m_exploredNodes.Add(currentNode);
                 }
 
-                ExpandFrontier(currentNode);
+                if (mode == Mode.BreadthFirstSearch)
+                {
+                    ExpandFrontier(currentNode);
+                } else if (mode == Mode.Dijkstra)
+                {
+                    ExpandFrontierDijkstra(currentNode);
+                }
+
+                
 
                 if (m_frontierNodes.Contains(m_goalNode))
                 {
@@ -193,6 +209,32 @@ public class PathFinder : MonoBehaviour
                 {
                     node.neighbors[i].previous = node;
                     m_frontierNodes.Enqueue(node.neighbors[i]);
+                }
+            }
+        }
+    }
+
+    void ExpandFrontierDijkstra(Node node)
+    {
+        if (node != null)
+        {
+            for (int i = 0; i < node.neighbors.Count; i++)
+            {
+                if (!m_exploredNodes.Contains(node.neighbors[i]) )
+                {
+                    float distanceToNeighbor = m_graph.GetNodeDistance(node, node.neighbors[i]);
+                    float newDistanceTraveled = distanceToNeighbor + node.distanceTraveled;
+
+                    if (float.IsPositiveInfinity(node.neighbors[i].distanceTraveled) || newDistanceTraveled<node.neighbors[i].distanceTraveled)
+                    {
+                        node.neighbors[i].previous = node;
+                        node.neighbors[i].distanceTraveled = newDistanceTraveled;
+                    }
+                    if (!m_frontierNodes.Contains(node.neighbors[i]))
+                    {
+                        m_frontierNodes.Enqueue(node.neighbors[i]);
+                    }
+                    
                 }
             }
         }
