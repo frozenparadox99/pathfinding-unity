@@ -105,4 +105,47 @@ public class PathFinder : MonoBehaviour
             goalNodeView.ColorNode(goalColor);
         }
     }
+
+    public IEnumerator SearchRoutine(float timeStep = 0.1f)
+    {
+        yield return null;
+
+        while (!isComplete)
+        {
+            if(m_frontierNodes.Count > 0)
+            {
+                Node currentNode = m_frontierNodes.Dequeue();
+                m_iterations++;
+
+                if (!m_exploredNodes.Contains(currentNode))
+                {
+                    m_exploredNodes.Add(currentNode);
+                }
+
+                ExpandFrontier(currentNode);
+                ShowColors();
+
+                yield return new WaitForSeconds(timeStep);
+            }
+            else
+            {
+                isComplete = true;
+            }
+        }
+    }
+
+    void ExpandFrontier(Node node)
+    {
+        if (node != null)
+        {
+            for(int i = 0; i < node.neighbors.Count; i++)
+            {
+                if(!m_exploredNodes.Contains(node.neighbors[i])&& !m_frontierNodes.Contains(node.neighbors[i]))
+                {
+                    node.neighbors[i].previous = node;
+                    m_frontierNodes.Enqueue(node.neighbors[i]);
+                }
+            }
+        }
+    }
 }
