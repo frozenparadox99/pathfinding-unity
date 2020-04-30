@@ -7,6 +7,11 @@ public class DemoController : MonoBehaviour
     public MapData mapData;
     public Graph graph;
 
+    public PathFinder pathFinder;
+    public int startX = 1;
+    public int startY = 0;
+    public int goalX = 14;
+    public int goalY = 1;
     private void Start()
     {
 
@@ -19,6 +24,13 @@ public class DemoController : MonoBehaviour
             if (graphView != null)
             {
                 graphView.Init(graph);
+            }
+
+            if(graph.IsWithinBounds(startX,startY) && graph.IsWithinBounds(goalX, goalY) && pathFinder!=null)
+            {
+                Node startNode = graph.nodes[startX, startY];
+                Node goalNode = graph.nodes[goalX, goalY];
+                pathFinder.Init(graph, graphView, startNode, goalNode);
             }
         }
     }
