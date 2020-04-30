@@ -11,6 +11,9 @@ public class Graph : MonoBehaviour
     int m_width;
     int m_height;
 
+    public int Width { get { return m_width; } }
+    public int Height { get { return m_height; } }
+
     // Since each node can have neighbors in 8 directions
     public static readonly Vector2[] allDirections =
     {

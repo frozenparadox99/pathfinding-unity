@@ -23,7 +23,7 @@ public class MapData : MonoBehaviour
 
     public string resourcePath = "Mapdata";
 
-     void Start()
+     void Awake()
     {
         if(textureMap == null)
         {
