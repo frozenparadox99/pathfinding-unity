@@ -433,6 +433,8 @@ MonoBehaviour:
   width: 10
   height: 5
   textAsset: {fileID: 4900000, guid: 1d603f9f8a28ca54c932c65bcb1e48bc, type: 3}
+  textureMap: {fileID: 0}
+  resourcePath: Mapdata
 --- !u!4 &1100597911
 Transform:
   m_ObjectHideFlags: 0

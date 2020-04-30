@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using UnityEngine.SceneManagement;
 
 public class MapData : MonoBehaviour
 {
@@ -18,7 +19,26 @@ public class MapData : MonoBehaviour
 
     public TextAsset textAsset;
 
-    public List<string> GetTextFromFile(TextAsset tAsset)
+    public Texture2D textureMap;
+
+    public string resourcePath = "Mapdata";
+
+     void Start()
+    {
+        if(textureMap == null)
+        {
+            string levelName = SceneManager.GetActiveScene().name;
+            textureMap = Resources.Load(resourcePath + "/" + levelName) as Texture2D;
+        }
+
+        if (textAsset == null)
+        {
+            string levelName = SceneManager.GetActiveScene().name;
+            textAsset = Resources.Load(resourcePath + "/" + levelName) as TextAsset;
+        }
+    }
+
+    public List<string> GetMapFromTextFile(TextAsset tAsset)
     {
         List<string> lines = new List<string>();
 
@@ -29,16 +49,46 @@ public class MapData : MonoBehaviour
             lines.AddRange( textData.Split(delimiters, System.StringSplitOptions.None));
             lines.Reverse();
         }
-        else
-        {
-            Debug.LogWarning("MAPDATA Gettextfromfile error");
-        }
+        
         return lines;
     }
 
-    public List<string> GetTextFromFile()
+    public List<string> GetMapFromTextFile()
     {
-        return GetTextFromFile(textAsset);
+        
+        return GetMapFromTextFile(textAsset);
+    }
+
+    public List<string> GetMapFromTexture(Texture2D texture)
+    {
+        List<string> lines = new List<string>();
+
+        if (texture != null)
+        {
+
+            for (int y = 0; y < texture.height; y++)
+            {
+                string newLine = "";
+
+                for (int x = 0; x < texture.width; x++)
+                {
+                    if (texture.GetPixel(x, y) == Color.black)
+                    {
+                        newLine += "1";
+                    }
+                    else if (texture.GetPixel(x, y) == Color.white)
+                    {
+                        newLine += "0";
+                    }
+                    else
+                    {
+                        newLine += " ";
+                    }
+                }
+                lines.Add(newLine);
+            }
+        }
+        return lines;
     }
 
     public void SetDimensions(List<string> textLines)
@@ -56,7 +106,17 @@ public class MapData : MonoBehaviour
    public int[,] MakeMap()
     {
         List<string> lines = new List<string>();
-        lines = GetTextFromFile();
+
+        if(textureMap != null)
+        {
+            lines = GetMapFromTexture(textureMap);
+        }
+        else
+        {
+            lines = GetMapFromTextFile();
+        }
+
+        
         SetDimensions(lines);
 
         int[,] map = new int[width, height];
