@@ -10,8 +10,8 @@ public class GraphView : MonoBehaviour
 
     public NodeView[,] nodeViews;
 
-    public Color baseColor = Color.white;
-    public Color wallColor = Color.black;
+    //public Color baseColor = Color.white;
+    //public Color wallColor = Color.black;
 
     public void Init(Graph graph)
     {
@@ -34,19 +34,22 @@ public class GraphView : MonoBehaviour
 
                 nodeViews[n.xIndex, n.yIndex] = nodeView;
 
-                if(n.nodeType == NodeType.Blocked)
-                {
-                    nodeView.ColorNode(wallColor);
-                }
-                else
-                {
-                    nodeView.ColorNode(baseColor);
-                }
+                Color originalColor = MapData.GetColorFromNodeType(n.nodeType);
+                nodeView.ColorNode(originalColor);
+
+                //if(n.nodeType == NodeType.Blocked)
+                //{
+                //    nodeView.ColorNode(wallColor);
+                //}
+                //else
+                //{
+                //    nodeView.ColorNode(baseColor);
+                //}
             }
         }
     }
 
-    public void ColorNodes(List<Node> nodes,Color color)
+    public void ColorNodes(List<Node> nodes,Color color,bool lerpColor = false,float lerpValue = 0.5f)
     {
         foreach (Node n in nodes)
         {
@@ -54,9 +57,17 @@ public class GraphView : MonoBehaviour
             {
                 NodeView nodeView = nodeViews[n.xIndex, n.yIndex];
 
+                Color newColor = color;
+
+                if (lerpColor)
+                {
+                    Color originalColor = MapData.GetColorFromNodeType(n.nodeType);
+                    newColor = Color.Lerp(originalColor, newColor, lerpValue);
+                }
+
                 if (nodeView != null)
                 {
-                    nodeView.ColorNode(color);
+                    nodeView.ColorNode(newColor);
                 }
             }
         }

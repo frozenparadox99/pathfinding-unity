@@ -159,4 +159,14 @@ public class MapData : MonoBehaviour
 
     }
 
+    public static Color GetColorFromNodeType(NodeType nodeType)
+    {
+        if (terrainLookupTable.ContainsValue(nodeType))
+        {
+            Color colorKey = terrainLookupTable.FirstOrDefault(x => x.Value == nodeType).Key;
+            return colorKey;
+        }
+        return Color.white;
+    }
+
 }
