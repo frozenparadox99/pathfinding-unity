@@ -121,57 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &402623246
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 402623248}
-  - component: {fileID: 402623247}
-  m_Layer: 0
-  m_Name: DemoController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &402623247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 402623246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fef9557ab2253e643ab771939c83bb6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mapData: {fileID: 1100597910}
-  graph: {fileID: 830058765}
-  pathFinder: {fileID: 1336855584}
-  startX: 1
-  startY: 3
-  goalX: 62
-  goalY: 20
-  timeStep: 0
---- !u!4 &402623248
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 402623246}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.826309, y: -0.29379624, z: -1.08007}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,6 +273,62 @@ MonoBehaviour:
     type: 3}
   baseColor: {r: 1, g: 1, b: 1, a: 1}
   wallColor: {r: 0, g: 0, b: 0, a: 1}
+--- !u!1 &889048237
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 889048239}
+  - component: {fileID: 889048238}
+  m_Layer: 0
+  m_Name: PathFinder (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &889048238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889048237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 414578cbd66b40642b420cb56c04c795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startColor: {r: 0, g: 1, b: 0, a: 1}
+  goalColor: {r: 1, g: 0, b: 0, a: 1}
+  frontierColor: {r: 1, g: 0, b: 1, a: 1}
+  exploredColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  pathColor: {r: 0, g: 1, b: 1, a: 1}
+  arrowColor: {r: 0.85, g: 0.85, b: 0.85, a: 1}
+  highlightColor: {r: 1, g: 1, b: 0.5, a: 1}
+  showIterations: 1
+  showColors: 1
+  showArrows: 1
+  exitOnGoal: 1
+  isComplete: 0
+  mode: 1
+--- !u!4 &889048239
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889048237}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,7 +460,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1336855583
+--- !u!1 &1361989157
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -463,53 +468,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1336855585}
-  - component: {fileID: 1336855584}
+  - component: {fileID: 1361989159}
+  - component: {fileID: 1361989158}
   m_Layer: 0
-  m_Name: PathFinder
+  m_Name: DemoController (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1336855584
+--- !u!114 &1361989158
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1336855583}
+  m_GameObject: {fileID: 1361989157}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4c5f94845a64de47a283787f60dbc8e, type: 3}
+  m_Script: {fileID: 11500000, guid: 13c504b2d7fe87b4dbb8732127bf7f55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startColor: {r: 0, g: 1, b: 0, a: 1}
-  goalColor: {r: 1, g: 0, b: 0, a: 1}
-  frontierColor: {r: 1, g: 0, b: 1, a: 1}
-  exploredColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  pathColor: {r: 0, g: 1, b: 1, a: 1}
-  arrowColor: {r: 0.85, g: 0.85, b: 0.85, a: 1}
-  highlightColor: {r: 1, g: 1, b: 0.5, a: 1}
-  showIterations: 1
-  showColors: 1
-  showArrows: 1
-  exitOnGoal: 1
-  isComplete: 0
-  mode: 1
---- !u!4 &1336855585
+  mapData: {fileID: 1100597910}
+  graph: {fileID: 830058765}
+  pathFinder: {fileID: 889048238}
+  startX: 1
+  startY: 3
+  goalX: 62
+  goalY: 20
+  timeStep: 0
+--- !u!4 &1361989159
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1336855583}
+  m_GameObject: {fileID: 1361989157}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.826309, y: -0.29379624, z: -1.08007}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8921530535505241231
 PrefabInstance:
