@@ -37,7 +37,8 @@ public class PathFinderPriorityQueue : MonoBehaviour
     {
         BreadthFirstSearch = 0,
         Dijkstra = 1,
-        GreedyBestFirstSearch = 2
+        GreedyBestFirstSearch = 2,
+        AStar = 3
     }
 
     public Mode mode = Mode.BreadthFirstSearch;
@@ -155,6 +156,9 @@ public class PathFinderPriorityQueue : MonoBehaviour
                 } else if (mode == Mode.GreedyBestFirstSearch)
                 {
                     expandFrontierGreedyBestFirst(currentNode);
+                } else if(mode == Mode.AStar)
+                {
+                    ExpandFrontierAStar(currentNode);
                 }
 
 
@@ -272,6 +276,34 @@ public class PathFinderPriorityQueue : MonoBehaviour
                     }
                     
                     m_frontierNodes.Enqueue(node.neighbors[i]);
+                }
+            }
+        }
+    }
+
+    void ExpandFrontierAStar(Node node)
+    {
+        if (node != null)
+        {
+            for (int i = 0; i < node.neighbors.Count; i++)
+            {
+                if (!m_exploredNodes.Contains(node.neighbors[i]))
+                {
+                    float distanceToNeighbor = m_graph.GetNodeDistance(node, node.neighbors[i]);
+                    float newDistanceTraveled = distanceToNeighbor + node.distanceTraveled + (int)node.nodeType;
+
+                    if (float.IsPositiveInfinity(node.neighbors[i].distanceTraveled) || newDistanceTraveled < node.neighbors[i].distanceTraveled)
+                    {
+                        node.neighbors[i].previous = node;
+                        node.neighbors[i].distanceTraveled = newDistanceTraveled;
+                    }
+                    if (!m_frontierNodes.Contains(node.neighbors[i]) && m_graph!=null)
+                    {
+                        int distanceToGoal = (int)m_graph.GetNodeDistance(node.neighbors[i], m_goalNode);
+                        node.neighbors[i].priority = (int)node.neighbors[i].distanceTraveled + distanceToGoal;
+                        m_frontierNodes.Enqueue(node.neighbors[i]);
+                    }
+
                 }
             }
         }
