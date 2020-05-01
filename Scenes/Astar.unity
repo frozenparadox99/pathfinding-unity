@@ -312,7 +312,7 @@ MonoBehaviour:
   showArrows: 1
   exitOnGoal: 1
   isComplete: 0
-  mode: 3
+  mode: 1
 --- !u!4 &889048239
 Transform:
   m_ObjectHideFlags: 0
@@ -380,7 +380,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -404,7 +404,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 15.5, y: 20, z: 8.5}
+  m_LocalPosition: {x: 31, y: 20, z: 17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

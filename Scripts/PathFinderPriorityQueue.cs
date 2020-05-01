@@ -247,7 +247,7 @@ public class PathFinderPriorityQueue : MonoBehaviour
                     }
                     if (!m_frontierNodes.Contains(node.neighbors[i]))
                     {
-                        node.neighbors[i].priority = (int)node.neighbors[i].distanceTraveled;
+                        node.neighbors[i].priority = node.neighbors[i].distanceTraveled;
                         m_frontierNodes.Enqueue(node.neighbors[i]);
                     }
 
@@ -272,7 +272,7 @@ public class PathFinderPriorityQueue : MonoBehaviour
                     node.neighbors[i].previous = node;
                     if (m_graph != null)
                     {
-                        node.neighbors[i].priority = (int)m_graph.GetNodeDistance(node.neighbors[i],m_goalNode);
+                        node.neighbors[i].priority = m_graph.GetNodeDistance(node.neighbors[i],m_goalNode);
                     }
                     
                     m_frontierNodes.Enqueue(node.neighbors[i]);
@@ -299,8 +299,8 @@ public class PathFinderPriorityQueue : MonoBehaviour
                     }
                     if (!m_frontierNodes.Contains(node.neighbors[i]) && m_graph!=null)
                     {
-                        int distanceToGoal = (int)m_graph.GetNodeDistance(node.neighbors[i], m_goalNode);
-                        node.neighbors[i].priority = (int)node.neighbors[i].distanceTraveled + distanceToGoal;
+                        float distanceToGoal = m_graph.GetNodeDistance(node.neighbors[i], m_goalNode);
+                        node.neighbors[i].priority = node.neighbors[i].distanceTraveled + distanceToGoal;
                         m_frontierNodes.Enqueue(node.neighbors[i]);
                     }
 

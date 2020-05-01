@@ -31,7 +31,7 @@ public class Node:IComparable<Node>
 
     public Node previous = null;
 
-    public int priority;
+    public float priority;
     public Node(int xIndex,int yIndex,NodeType nodeType)
     {
         this.xIndex = xIndex;
