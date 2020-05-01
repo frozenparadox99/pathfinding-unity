@@ -209,6 +209,7 @@ public class PathFinderPriorityQueue : MonoBehaviour
                 if (!m_exploredNodes.Contains(node.neighbors[i]) && !m_frontierNodes.Contains(node.neighbors[i]))
                 {
                     node.neighbors[i].previous = node;
+                    node.neighbors[i].priority = m_exploredNodes.Count;
                     m_frontierNodes.Enqueue(node.neighbors[i]);
                 }
             }
