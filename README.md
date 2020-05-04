@@ -4,7 +4,7 @@
 
 ## Terrain 1
 
-### 1) Djkstra's Algorithm
+### 1) BFS
 
 <a href="https://imgur.com/a2p3mlI"><img src="https://i.imgur.com/a2p3mlI.gif" title="source: imgur.com" /></a>
 
@@ -16,7 +16,7 @@
 
 <a href="https://imgur.com/f3ezczw"><img src="https://i.imgur.com/f3ezczw.gif" title="source: imgur.com" /></a>
 
-### 4) BFS
+### 4) Djkstra's Algorithm
 
 <a href="https://imgur.com/AT1gTj7"><img src="https://i.imgur.com/AT1gTj7.gif" title="source: imgur.com" /></a>
 
